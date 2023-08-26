@@ -1,0 +1,111 @@
+:root {
+    --bg-main: #000;
+    --form-main: #fff;
+}
+
+.home {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-main);
+    padding: 0rem 8rem;
+    border-radius: 1.125rem;
+}
+
+.home .home-title {
+    color: var(--form-main);
+    text-align: center;
+    font-family: Inter;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2.5rem 0rem 1.5rem;
+}
+
+.post-form {
+    background-color: var(--form-main);
+    height: 38.125rem;
+    border-radius: 1.125rem;
+    padding: 2.50rem 5rem;
+}
+
+.post-form .form-title {
+    color: var(--bg-main);
+    font-family: Inter;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.post-form .post-lable {
+    color: #000;
+    font-family: Inter;
+    font-size: 1.125rem;
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.post-form .post-control {
+    border-radius: 0.5625rem;
+    border: 1px solid #C5C5C5;
+    margin-bottom: 1rem;
+    padding: 0.7rem 1rem;
+}
+
+.post-form .output-value {
+    border-radius: 0.5625rem;
+    border: 1px solid #C5C5C5;
+    height: 13.375rem;
+}
+
+.post-form .post-output {
+    height: 9.40rem;
+}
+
+.post-form .value-char {
+    color: #898989;
+    font-family: Inter;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding-top: 1.8rem;
+}
+
+.post-form .post {
+    display: flex;
+    gap: 0.44rem;
+}
+
+.post-form .copy {
+    font-size: 1.8rem;
+}
+
+.post-form .regenerate {
+    border-radius: 0.5rem;
+    background: var(--form-main);
+    padding: 0.65rem 2.31rem;
+    color: var(--bg-main);
+    text-transform: capitalize;
+}
+
+.post-form .post-start {
+    border-radius: 0.5rem;
+    background: var(--bg-main);
+    padding: 0.65rem 2.31rem;
+    color: var(--form-main);
+    text-transform: capitalize;
+}
+
+.add-post {
+    padding: 2rem 0rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.add-post .add-post-on {
+    color: var(--bg-main);
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
