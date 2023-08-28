@@ -6,12 +6,12 @@ const Home = () => {
   return (
     <>
       <div className="home">
-        <div className="container">
+        <div className="container" >
           <div className="row">
-            <div className="home-title">
+            <div className="home-title" >
               post generator
-              <span className="ms-2">
-                <img src={ai} width="30" height="30"/>
+              <span className="logo">
+                <h1 className="logo-letter">AI</h1>
               </span>
             </div>
             <Form />
