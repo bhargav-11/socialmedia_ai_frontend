@@ -17,7 +17,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 2.5rem 0rem 1.5rem;
+    padding: 0.5rem 0rem 1.5rem;
     display: flex;
     padding-left: 28rem;
 }
@@ -42,9 +42,9 @@ padding: 0.3rem;
 
 .post-form {
     background-color: var(--form-main);
-    height: 38.125rem;
+    height: 37.125rem;
     border-radius: 1.125rem;
-    padding: 2.50rem 4rem;
+    padding: 2rem 4rem;
 }
 
 .post-form .form-title {
@@ -119,7 +119,7 @@ padding: 0.3rem;
 .post-form .post {
     display: flex;
     gap: 0.44rem;
-    width: 30.333333%;
+    width: 31.333333%;
 }
 
 .post-form .copy {

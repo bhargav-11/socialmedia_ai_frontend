@@ -254,7 +254,7 @@ function Form() {
             </div>
             <div className="row justify-content-between post-icons">
               <div className="col-4 value-char">
-                {wordCount} words/239 words{" "}
+                {wordCount} words
               </div>
               <div className="col-4 post">
                 <div className="copy">
