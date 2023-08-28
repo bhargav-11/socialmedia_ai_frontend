@@ -104,7 +104,7 @@ padding: 0.3rem;
 }
 
 .message-content::-webkit-scrollbar-track {
-  background-color: #f7f7f7;
+  background-color: #fff;
 }
 .post-form .value-char {
     color: #898989;
@@ -124,6 +124,7 @@ padding: 0.3rem;
 
 .post-form .copy {
     font-size: 1.8rem;
+    cursor: pointer;
 }
 
 .post-form .regenerate {
