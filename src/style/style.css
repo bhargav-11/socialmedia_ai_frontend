@@ -49,7 +49,7 @@ padding: 0.3rem;
 
 .post-form .form-title {
     color: var(--bg-main);
-    font-family: Inter;
+     font-family: Inherit;
     font-size: 1.25rem;
     font-weight: 600;
     text-transform: capitalize;
@@ -58,7 +58,7 @@ padding: 0.3rem;
 
 .post-form .post-lable {
     color: #000;
-    font-family: Inter;
+     font-family: Inherit;
     font-size: 1.125rem;
     text-align: center;
     font-weight: 600;
@@ -108,7 +108,7 @@ padding: 0.3rem;
 }
 .post-form .value-char {
     color: #898989;
-    font-family: Inter;
+    font-family: Inherit;
     font-size: 0.9375rem;
     font-weight: 400;
     text-transform: capitalize;
@@ -152,7 +152,7 @@ padding: 0.3rem;
 
 .add-post .add-post-on {
     color: var(--bg-main);
-    font-family: Inter;
+     font-family: Inherit;
     font-size: 1.5rem;
     font-weight: 400;
 }

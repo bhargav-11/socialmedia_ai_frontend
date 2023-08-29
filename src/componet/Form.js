@@ -13,6 +13,7 @@ function Form() {
   });
   const [postResponse, setPostResponse] = useState("");
   const apiUrl = process.env.REACT_APP_SOCILA_API;
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setPostdata({
@@ -37,8 +38,10 @@ function Form() {
       console.log(error);
     }
   };
+
   const paragraphs = postResponse.split("\n\n");
   const wordCount = postResponse.length;
+
   const copyToclipboard = () => {
     navigator.clipboard.writeText(JSON.stringify(postResponse));
     Swal.fire({
@@ -51,89 +54,47 @@ function Form() {
       showConfirmButton: false,
     });
   };
-  const postLinkedin = () => {
-    const data = {
-      generated_post: postResponse,
+
+  function Add_Social_Icon(platform) {
+
+    const data = { 
+      post_message: postResponse,
+      post_url: "", 
+      platform: platform 
     };
+    
+   
+    
     try {
-      axios
-        .post(apiUrl + "/linkedin", data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          console.log(response.data);
-          Swal.fire({
-            title: response.data.message,
-            icon: "success",
-            toast: true,
-            timer: 2000,
-            position: "top-right",
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      axios.post(apiUrl + "/post", data, {
+        headers: {
+          "Content-Type": "application/json" 
+        }
+      }).then((response) => {
+        Swal.fire({
+          title: response.data.message,
+          icon: "success",
+          toast: true,
+          timer: 2000,
+          position: "top-right",
+          timerProgressBar: true,
+          showConfirmButton: false,})
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: error,
+          icon: "error",
+          toast: true,
+          timer: 2000,
+          position: "top-right",
+          timerProgressBar: true,
+          showConfirmButton: false,})      });
+    
     } catch (error) {
-      console.log(error);
+      console.error("An error occurred:", error);
     }
-  };
-  const postFacebook = () => {
-    const data = {
-      message: postResponse,
-    };
-    try {
-      axios
-        .post(apiUrl + "/facebook", data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          Swal.fire({
-            title: response.data.message,
-            icon: "success",
-            toast: true,
-            timer: 2000,
-            position: "top-right",
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const postTwitter = () => {
-    const data = {
-      text: postResponse,
-    };
-    try {
-      axios
-        .post(apiUrl + "/twitter", data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          Swal.fire({
-            title: response.data.message,
-            icon: "success",
-            toast: true,
-            timer: 2000,
-            position: "top-right",
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  return (
+  }
+ return (
     <div className="post-form">
       <div className="container ">
         <div className="row justify-content-center">
@@ -150,7 +111,7 @@ function Form() {
             <div className="row">
               <label
                 for="inputPassword"
-                className="col-sm-1 col-form-label post-lable"
+                className="col-sm-1 col-form-label post-lable mt-1"
               >
                 goal
               </label>
@@ -189,7 +150,7 @@ function Form() {
                 <div className="row">
                   <label
                     for="inputPassword"
-                    className="col-sm-1 col-form-label post-lable ms-2"
+                    className="col-sm-1 col-form-label post-lable ms-2 mt-1"
                   >
                     tone
                   </label>
@@ -202,12 +163,12 @@ function Form() {
                       onChange={handleChange}
                     >
                       <option selected value="Friendly">
-                        Friendly
+                        😊 Friendly
                       </option>
-                      <option value="Professional">Professional</option>
-                      <option value="Humorous">Humorous</option>
-                      <option value="Inspirational">Inspirational</option>
-                      <option value="Educational">Educational</option>
+                      <option value="Professional"> 💼 Professional</option>
+                      <option value="Inspirational">🧑‍🎓Inspirational</option>
+                      <option value="Humorous">😄 Humorous</option>
+                      <option value="Educational">📖 Educational</option>
                     </select>
                   </div>
                 </div>
@@ -216,7 +177,7 @@ function Form() {
                 <div className="row">
                   <label
                     for="inputPassword"
-                    className="col-sm-1 col-form-label post-lable "
+                    className="col-sm-1 col-form-label post-lable mt-1"
                   >
                     audience
                   </label>
@@ -274,9 +235,7 @@ function Form() {
             </div>
           </div>
           <Add_post
-            postLinkedin={postLinkedin}
-            postFacebook={postFacebook}
-            postTwitter={postTwitter}
+            Add_Social_Icon={Add_Social_Icon}
           />
         </div>
       </div>

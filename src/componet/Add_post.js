@@ -4,7 +4,7 @@ import linkedin from "../images/linkedin.png";
 import facebook from "../images/facebook.png";
 import insta from "../images/instagram.png";
 
-const Add_post = ({postLinkedin,postFacebook,postTwitter}) => {
+const Add_post = ({Add_Social_Icon}) => {
   return (
     <div className="add-post text-center">
       <div className="add-post-on pt-2"> Add post on </div>
@@ -14,13 +14,13 @@ const Add_post = ({postLinkedin,postFacebook,postTwitter}) => {
 </svg>
       </div>
       <div className="twiter p-2">
-        <img src={twiter} width="40" height="40" onClick={postTwitter} style={{cursor:"pointer"}}/>
+        <img src={twiter} width="40" height="40" onClick={()=>Add_Social_Icon("twitter")} style={{cursor:"pointer"}}/>
       </div>
       <div className="linkedin p-2">
-        <img src={linkedin} width="40" height="40" onClick={postLinkedin} style={{cursor:"pointer"}}/>
+        <img src={linkedin} width="40" height="40" onClick={() =>Add_Social_Icon("linkedin")} style={{cursor:"pointer"}}/>
       </div>
       <div className="facebook p-2">
-        <img src={facebook} width="40" height="40" onClick={postFacebook} style={{cursor:"pointer"}}/>
+        <img src={facebook} width="40" height="40" onClick={ () =>Add_Social_Icon("facebook")} style={{cursor:"pointer"}}/>
       </div>
       <div className="insta p-2">
         <img src={insta} width="40" height="40" style={{cursor:"pointer"}}/>
