@@ -3,14 +3,17 @@ import { RiFileCopyLine } from "react-icons/ri";
 import Add_post from "./Add_post";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PulseLoader from "react-spinners/PulseLoader";
 
 function Form() {
-  const [PostData, setPostdata] = useState({
+  const [regenerateButtonLoading, setRegenerateButtonLoading] = useState(false);
+  const [startButtonLoading, setStartButtonLoading] = useState(false);  const [PostData, setPostdata] = useState({
     command: "",
     goal: "",
     tone: "",
     audience: "",
   });
+
   const [postResponse, setPostResponse] = useState("");
   const apiUrl = process.env.REACT_APP_SOCILA_API;
 
@@ -21,23 +24,30 @@ function Form() {
       [name]: value,
     });
   };
-  const Social_post = () => {
-    console.log("PostData", PostData);
-    try {
-      axios
-        .post(apiUrl + "/generate-post", PostData, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          setPostResponse(response.data.generated_post);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
+
+  const handlepostgenrater = (action) => {
+    if (action === "regenerate") {
+      setRegenerateButtonLoading(true);
+    } else if (action === "start") {
+      setStartButtonLoading(true);
     }
+
+    axios
+      .post(apiUrl + "/generate-post", PostData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        setPostResponse(response.data.generated_post);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setRegenerateButtonLoading(false);
+        setStartButtonLoading(false);
+      });
   };
+
 
   const paragraphs = postResponse.split("\n\n");
   const wordCount = postResponse.length;
@@ -55,20 +65,17 @@ function Form() {
     });
   };
 
-  function Add_Social_Icon(platform) {
+  function PostSocialicon(platform) {
 
-    const data = { 
+    const data = {
       post_message: postResponse,
-      post_url: "", 
-      platform: platform 
+      post_url: "",
+      platform: platform
     };
-    
-   
-    
     try {
       axios.post(apiUrl + "/post", data, {
         headers: {
-          "Content-Type": "application/json" 
+          "Content-Type": "application/json"
         }
       }).then((response) => {
         Swal.fire({
@@ -78,23 +85,26 @@ function Form() {
           timer: 2000,
           position: "top-right",
           timerProgressBar: true,
-          showConfirmButton: false,})
+          showConfirmButton: false,
+        })
       })
-      .catch((error) => {
-        Swal.fire({
-          title: error,
-          icon: "error",
-          toast: true,
-          timer: 2000,
-          position: "top-right",
-          timerProgressBar: true,
-          showConfirmButton: false,})      });
-    
+        .catch((error) => {
+          Swal.fire({
+            title: error,
+            icon: "error",
+            toast: true,
+            timer: 2000,
+            position: "top-right",
+            timerProgressBar: true,
+            showConfirmButton: false,
+          })
+        });
+
     } catch (error) {
       console.error("An error occurred:", error);
     }
   }
- return (
+  return (
     <div className="post-form">
       <div className="container ">
         <div className="row justify-content-center">
@@ -222,20 +232,53 @@ function Form() {
                   <RiFileCopyLine onClick={copyToclipboard} />
                 </div>
                 <div>
-                  <button className="regenerate" onClick={Social_post}>
-                    regenerate
-                  </button>
-                </div>
-                <div>
-                  <button className="post-start" onClick={Social_post}>
-                    start
-                  </button>
-                </div>
+          <button
+            className="regenerate"
+            onClick={() => handlepostgenrater("regenerate")}
+            disabled={!postResponse || regenerateButtonLoading}
+          >
+            {regenerateButtonLoading ? (
+              <div className="regenerateloader">
+                <PulseLoader
+                  color="#000"
+                  cssOverride={{}}
+                  loading
+                  margin={4}
+                  size={15}
+                  speedMultiplier={1}
+                />
               </div>
+            ) : (
+              "Regenerate"
+            )}
+          </button>
+        </div>
+       
+        <button
+          className="post-start"
+          onClick={() => handlepostgenrater("start")}
+          disabled={startButtonLoading || regenerateButtonLoading}
+        >
+          {startButtonLoading ? (
+            <div className="loader text-center">
+              <PulseLoader
+                color="#fff"
+                cssOverride={{}}
+                loading
+                // margin={4}
+                size={15}
+                speedMultiplier={1}
+              />
+            </div>
+          ) : (
+            "Start"
+          )}
+        </button>
+      </div>
             </div>
           </div>
           <Add_post
-            Add_Social_Icon={Add_Social_Icon}
+            Add_Social_Icon={PostSocialicon}
           />
         </div>
       </div>
