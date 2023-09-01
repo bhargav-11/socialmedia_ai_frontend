@@ -5,9 +5,10 @@
 
 .home {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    /* height: 100vh; */
     background-color: var(--bg-main);
-    padding: 0rem 8rem;
+    padding: 2rem 8rem;
 }
 
 .home .home-title {
@@ -23,18 +24,19 @@
 }
 
 
-.logo-letter{
+.logo-letter {
     color: #000;
     background-color: #fff;
     border-radius: 50%;
-text-align: center;
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-size: 1.5rem;
-font-weight: 900;
-padding: 0.3rem;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0.3rem;
 }
-.logo{
-    width:2.5rem;
+
+.logo {
+    width: 2.5rem;
     margin-left: 1.5rem;
     margin-top: 0.8rem;
 
@@ -42,14 +44,14 @@ padding: 0.3rem;
 
 .post-form {
     background-color: var(--form-main);
-    height: 37.125rem;
+    /* height: 37.125rem; */
     border-radius: 1.125rem;
-    padding: 2rem 4rem;
+    padding: 1rem 4rem;
 }
 
 .post-form .form-title {
     color: var(--bg-main);
-     font-family: Inherit;
+    font-family: Inherit;
     font-size: 1.25rem;
     font-weight: 600;
     text-transform: capitalize;
@@ -58,7 +60,7 @@ padding: 0.3rem;
 
 .post-form .post-lable {
     color: #000;
-     font-family: Inherit;
+    font-family: Inherit;
     font-size: 1.125rem;
     text-align: center;
     font-weight: 600;
@@ -77,35 +79,51 @@ padding: 0.3rem;
 .post-form .output-value {
     border-radius: 0.5625rem;
     border: 1px solid #C5C5C5;
-    height: 13.375rem;
+    /* height: 13.375rem; */
     width: 98%;
-  }
+}
 
-  .post-form .post-output {
-    height: 9.40rem;
+.post-form .post-output {
+    /* height: 9.40rem; */
     padding: 1rem;
     overflow: hidden;
-  }
+}
 
-  .message-content {
-    max-height: 100%;
-    max-width: 100%; 
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .message-content::-webkit-scrollbar {
+.message-content {
+    /* min-height: 100%;
+    min-width: 100%;  */
+    /* overflow-y: auto; */
+    /* overflow-x: hidden; */
+}
+
+.message-content textarea {
+    border: none;
+    transition: border-color 0.3s ease-in-out;
+    overflow: auto;
+}
+
+.message-content textarea:focus {
+    border-color: transparent;
+    outline: none;
+}
+
+/* .message-content::-webkit-scrollbar {
   width: 6px;
 }
 
 .message-content::-webkit-scrollbar-thumb {
-  background-color: #ccc;
+  background-color: #fff;
   border-radius: 3px;
   padding: 4%;
 }
 
 .message-content::-webkit-scrollbar-track {
   background-color: #fff;
+} */
+.error-message {
+    color: #ff0000;
 }
+
 .post-form .value-char {
     color: #898989;
     font-family: Inherit;
@@ -152,7 +170,7 @@ padding: 0.3rem;
 
 .add-post .add-post-on {
     color: var(--bg-main);
-     font-family: Inherit;
+    font-family: Inherit;
     font-size: 1.5rem;
     font-weight: 400;
 }
@@ -166,8 +184,9 @@ padding: 0.3rem;
     text-transform: capitalize;
     text-align: center;
     /* padding: -5rem ; */
-  }
-  .regenerateloader {
+}
+
+.regenerateloader {
     display: flex;
     justify-content: center;
     background-color: #FFF;
@@ -175,4 +194,4 @@ padding: 0.3rem;
     text-transform: capitalize;
     height: 100%;
     text-align: center;
-  }
+}

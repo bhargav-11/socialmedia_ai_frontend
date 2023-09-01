@@ -7,13 +7,16 @@ import PulseLoader from "react-spinners/PulseLoader";
 
 function Form() {
   const [regenerateButtonLoading, setRegenerateButtonLoading] = useState(false);
-  const [startButtonLoading, setStartButtonLoading] = useState(false);  const [PostData, setPostdata] = useState({
+  const [startButtonLoading, setStartButtonLoading] = useState(false);
+  const [PostData, setPostdata] = useState({
     command: "",
-    goal: "",
-    tone: "",
-    audience: "",
+    goal: "encourage engagement",
+    tone: "😊 Friendly",
+    audience: "Parents",
   });
-
+  const [errors, setErrors] = useState({
+    command: '',
+  });
   const [postResponse, setPostResponse] = useState("");
   const apiUrl = process.env.REACT_APP_SOCILA_API;
 
@@ -23,15 +26,30 @@ function Form() {
       ...PostData,
       [name]: value,
     });
+    setErrors({ ...errors, [name]: '' });
+  };
+  const handlenewresponse = (event)=>{
+    setPostResponse(event.target.value);
+  }
+  const handleValidation = () => {
+    let valid = true;
+    const newErrors = { ...errors };
+    if (!PostData.command.trim()) {
+      newErrors.command = '*Command is required';
+      valid = false;
+    }
+    setErrors(newErrors);
+    return valid;
   };
 
   const handlepostgenrater = (action) => {
+    if (handleValidation()) {
     if (action === "regenerate") {
       setRegenerateButtonLoading(true);
     } else if (action === "start") {
       setStartButtonLoading(true);
     }
-
+   
     axios
       .post(apiUrl + "/generate-post", PostData, {
         headers: { "Content-Type": "application/json" },
@@ -46,12 +64,10 @@ function Form() {
         setRegenerateButtonLoading(false);
         setStartButtonLoading(false);
       });
+    }
   };
 
-
-  const paragraphs = postResponse.split("\n\n");
-  const wordCount = postResponse.length;
-
+  const charCount = postResponse.length;
   const copyToclipboard = () => {
     navigator.clipboard.writeText(JSON.stringify(postResponse));
     Swal.fire({
@@ -66,28 +82,29 @@ function Form() {
   };
 
   function PostSocialicon(platform) {
-
     const data = {
       post_message: postResponse,
       post_url: "",
-      platform: platform
+      platform: platform,
     };
     try {
-      axios.post(apiUrl + "/post", data, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then((response) => {
-        Swal.fire({
-          title: response.data.message,
-          icon: "success",
-          toast: true,
-          timer: 2000,
-          position: "top-right",
-          timerProgressBar: true,
-          showConfirmButton: false,
+      axios
+        .post(apiUrl + "/post", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-      })
+        .then((response) => {
+          Swal.fire({
+            title: response.data.message,
+            icon: "success",
+            toast: true,
+            timer: 2000,
+            position: "top-right",
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
+        })
         .catch((error) => {
           Swal.fire({
             title: error,
@@ -97,9 +114,8 @@ function Form() {
             position: "top-right",
             timerProgressBar: true,
             showConfirmButton: false,
-          })
+          });
         });
-
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -116,8 +132,11 @@ function Form() {
               name="command"
               value={PostData.command}
               onChange={handleChange}
+              onBlur={handleValidation}
               placeholder="write a post about LinkedIn success for PR agencies"
+              required
             />
+            <span className="error-message">{errors.command}</span>
             <div className="row">
               <label
                 for="inputPassword"
@@ -218,68 +237,67 @@ function Form() {
           <div className="output-value">
             <div className="post-output">
               <div className="message-content ">
-                {paragraphs.map((paragraph, index) => (
+                <textarea className="w-100" name="response" value={postResponse} onChange={handlenewresponse}>
+                
+                {/* {paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
-                ))}
+                ))} */}
+              </textarea>
               </div>
             </div>
-            <div className="row justify-content-between post-icons">
-              <div className="col-4 value-char">
-                {wordCount} words
-              </div>
+            <div className="row justify-content-between post-icons pb-2">
+              <div className="col-4 value-char">{charCount} Characters</div>
               <div className="col-4 post">
                 <div className="copy">
                   <RiFileCopyLine onClick={copyToclipboard} />
                 </div>
                 <div>
-          <button
-            className="regenerate"
-            onClick={() => handlepostgenrater("regenerate")}
-            disabled={!postResponse || regenerateButtonLoading}
-          >
-            {regenerateButtonLoading ? (
-              <div className="regenerateloader">
-                <PulseLoader
-                  color="#000"
-                  cssOverride={{}}
-                  loading
-                  margin={4}
-                  size={15}
-                  speedMultiplier={1}
-                />
+                  <button
+                    className="regenerate"
+                    onClick={() => handlepostgenrater("regenerate")}
+                    disabled={!postResponse || regenerateButtonLoading}
+                  >
+                    {regenerateButtonLoading ? (
+                      <div className="regenerateloader">
+                        <PulseLoader
+                          color="#000"
+                          cssOverride={{}}
+                          loading
+                          margin={4}
+                          size={15}
+                          speedMultiplier={1}
+                        />
+                      </div>
+                    ) : (
+                      "Regenerate"
+                    )}
+                  </button>
+                </div>
+
+                <button
+                  className="post-start"
+                  onClick={() => handlepostgenrater("start")}
+                  disabled={startButtonLoading || regenerateButtonLoading}
+                >
+                  {startButtonLoading ? (
+                    <div className="loader text-center">
+                      <PulseLoader
+                        color="#fff"
+                        cssOverride={{}}
+                        loading
+                        // margin={4}
+                        size={15}
+                        speedMultiplier={1}
+                      />
+                    </div>
+                  ) : (
+                    "Start"
+                  )}
+                </button>
               </div>
-            ) : (
-              "Regenerate"
-            )}
-          </button>
-        </div>
-       
-        <button
-          className="post-start"
-          onClick={() => handlepostgenrater("start")}
-          disabled={startButtonLoading || regenerateButtonLoading}
-        >
-          {startButtonLoading ? (
-            <div className="loader text-center">
-              <PulseLoader
-                color="#fff"
-                cssOverride={{}}
-                loading
-                // margin={4}
-                size={15}
-                speedMultiplier={1}
-              />
-            </div>
-          ) : (
-            "Start"
-          )}
-        </button>
-      </div>
             </div>
           </div>
-          <Add_post
-            Add_Social_Icon={PostSocialicon}
-          />
+          <Add_post Add_Social_Icon={PostSocialicon} />
         </div>
       </div>
     </div>
