@@ -237,7 +237,7 @@ function Form() {
           <div className="output-value">
             <div className="post-output">
               <div className="message-content ">
-                <textarea className="w-100" name="response" value={postResponse} onChange={handlenewresponse}>
+                <textarea className="w-100" name="response" value={postResponse} onChange={handlenewresponse} rows={6}>
 
                   {/* {paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
@@ -282,7 +282,7 @@ function Form() {
                   {startButtonLoading ? (
                     <div className=" startloader">
                       <PulseLoader
-                      style={{position:"relative",bottom:"0.3rem",display:"flex"}}
+                      style={{position:"relative",bottom:"0.3rem",display:"flex",left:"2.8rem"}}
                         color="#fff"
                         cssOverride={{}}
                         loading
