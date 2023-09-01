@@ -15,7 +15,7 @@ function Form() {
     audience: "Parents",
   });
   const [errors, setErrors] = useState({
-    command: '',
+    command: "",
   });
   const [postResponse, setPostResponse] = useState("");
   const apiUrl = process.env.REACT_APP_SOCILA_API;
@@ -26,16 +26,16 @@ function Form() {
       ...PostData,
       [name]: value,
     });
-    setErrors({ ...errors, [name]: '' });
+    setErrors({ ...errors, [name]: "" });
   };
-  const handlenewresponse = (event)=>{
+  const handlenewresponse = (event) => {
     setPostResponse(event.target.value);
-  }
+  };
   const handleValidation = () => {
     let valid = true;
     const newErrors = { ...errors };
     if (!PostData.command.trim()) {
-      newErrors.command = '*Command is required';
+      newErrors.command = "*Command is required";
       valid = false;
     }
     setErrors(newErrors);
@@ -99,7 +99,7 @@ function Form() {
             title: response.data.message,
             icon: "success",
             toast: true,
-            timer: 2000,
+            timer: 3000,
             position: "top-right",
             timerProgressBar: true,
             showConfirmButton: false,
@@ -107,10 +107,10 @@ function Form() {
         })
         .catch((error) => {
           Swal.fire({
-            title: error,
+            title: error.response.data.error,
             icon: "error",
             toast: true,
-            timer: 2000,
+            timer: 3000,
             position: "top-right",
             timerProgressBar: true,
             showConfirmButton: false,
@@ -135,7 +135,7 @@ function Form() {
               onBlur={handleValidation}
               placeholder="write a post about LinkedIn success for PR agencies"
               required
-            />            
+            />
             <span className="error-message ">{errors.command}</span>
             <div className="row">
               <label
@@ -237,8 +237,13 @@ function Form() {
           <div className="output-value">
             <div className="post-output">
               <div className="message-content ">
-                <textarea className="w-100" name="response" value={postResponse} onChange={handlenewresponse} rows={6}>
-
+                <textarea
+                  className="w-100"
+                  name="response"
+                  value={postResponse}
+                  onChange={handlenewresponse}
+                  rows={6}
+                >
                   {/* {paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))} */}
@@ -282,7 +287,12 @@ function Form() {
                   {startButtonLoading ? (
                     <div className=" startloader">
                       <PulseLoader
-                      style={{position:"relative",bottom:"0.3rem",display:"flex",left:"2.8rem"}}
+                        style={{
+                          position: "relative",
+                          bottom: "0.3rem",
+                          display: "flex",
+                          left: "2.8rem",
+                        }}
                         color="#fff"
                         cssOverride={{}}
                         loading
