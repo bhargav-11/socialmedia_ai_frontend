@@ -44,26 +44,26 @@ function Form() {
 
   const handlepostgenrater = (action) => {
     if (handleValidation()) {
-    if (action === "regenerate") {
-      setRegenerateButtonLoading(true);
-    } else if (action === "start") {
-      setStartButtonLoading(true);
-    }
-   
-    axios
-      .post(apiUrl + "/generate-post", PostData, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        setPostResponse(response.data.generated_post);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setRegenerateButtonLoading(false);
-        setStartButtonLoading(false);
-      });
+      if (action === "regenerate") {
+        setRegenerateButtonLoading(true);
+      } else if (action === "start") {
+        setStartButtonLoading(true);
+      }
+
+      axios
+        .post(apiUrl + "/generate-post", PostData, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          setPostResponse(response.data.generated_post);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setRegenerateButtonLoading(false);
+          setStartButtonLoading(false);
+        });
     }
   };
 
@@ -124,7 +124,7 @@ function Form() {
     <div className="post-form">
       <div className="container ">
         <div className="row justify-content-center">
-          <div className="form-title mb-2">command to bot</div>
+          <div className="form-title mb-3 mt-4">command to bot</div>
           <div className="input-form">
             <input
               type="text"
@@ -135,8 +135,8 @@ function Form() {
               onBlur={handleValidation}
               placeholder="write a post about LinkedIn success for PR agencies"
               required
-            />
-            <span className="error-message">{errors.command}</span>
+            />            
+            <span className="error-message ">{errors.command}</span>
             <div className="row">
               <label
                 for="inputPassword"
@@ -238,11 +238,11 @@ function Form() {
             <div className="post-output">
               <div className="message-content ">
                 <textarea className="w-100" name="response" value={postResponse} onChange={handlenewresponse}>
-                
-                {/* {paragraphs.map((paragraph, index) => (
+
+                  {/* {paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))} */}
-              </textarea>
+                </textarea>
               </div>
             </div>
             <div className="row justify-content-between post-icons pb-2">
@@ -280,8 +280,9 @@ function Form() {
                   disabled={startButtonLoading || regenerateButtonLoading}
                 >
                   {startButtonLoading ? (
-                    <div className="loader text-center">
+                    <div className=" startloader">
                       <PulseLoader
+                      style={{position:"relative",bottom:"0.3rem",display:"flex"}}
                         color="#fff"
                         cssOverride={{}}
                         loading

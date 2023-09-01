@@ -46,7 +46,7 @@
     background-color: var(--form-main);
     /* height: 37.125rem; */
     border-radius: 1.125rem;
-    padding: 1rem 4rem;
+    padding: 0rem 4rem;
 }
 
 .post-form .form-title {
@@ -107,7 +107,7 @@
     outline: none;
 }
 
-/* .message-content::-webkit-scrollbar {
+.message-content::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -119,9 +119,12 @@
 
 .message-content::-webkit-scrollbar-track {
   background-color: #fff;
-} */
+}
 .error-message {
     color: #ff0000;
+    position: relative;
+    bottom: 0.6rem;
+    left: 0.5rem;
 }
 
 .post-form .value-char {
@@ -162,7 +165,7 @@
 }
 
 .add-post {
-    padding: 2rem 0rem;
+    padding: 1rem 0rem;
     display: flex;
     gap: 0.5rem;
     justify-content: center;
@@ -176,14 +179,15 @@
 }
 
 
-.loader {
+.startloader {
     display: flex;
     justify-content: center;
     background-color: #000;
     border-radius: 0.5rem;
-    text-transform: capitalize;
     text-align: center;
-    /* padding: -5rem ; */
+    width: 2rem;
+    height: 0.4rem;
+
 }
 
 .regenerateloader {
